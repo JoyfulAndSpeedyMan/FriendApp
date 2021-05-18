@@ -1,5 +1,6 @@
 // 这里的vm，就是我们在vue文件里面的this，所以我们能在这里获取vuex的变量，比如存放在里面的token
 // 同时，我们也可以在此使用getApp().globalData，如果你把token放在getApp().globalData的话，也是可以使用的
+import auth from '@/common/utils/auth.js'
 const install = (Vue, vm) => {
 	Vue.prototype.$u.http.setConfig({
 		baseUrl: 'http://localhost:10000',
@@ -13,7 +14,8 @@ const install = (Vue, vm) => {
 	});
 	// 请求拦截，配置Token等参数
 	Vue.prototype.$u.http.interceptor.request = (config) => {
-		config.header.token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJBUFAiLCJpc3MiOiJwaW4iLCJleHAiOjE2MTA2MDM5ODEsInVzZXJJZCI6IjVmZjJhZWNkY2ZiNmRlMzYyYjIyOTZiYiIsImlhdCI6MTYwOTczOTk4MX0.L0Xslsj4k2OU3Z0ZorctZoBQA6PHbPPmGcQSb1vNpNc';
+		
+		config.header.token = auth.getAccessToken();
 
 		// 方式一，存放在vuex的token，假设使用了uView封装的vuex方式，见：https://uviewui.com/components/globalVariable.html
 		// config.header.token = vm.token;

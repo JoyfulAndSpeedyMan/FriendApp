@@ -61,12 +61,18 @@
 			finish(value) {
 				this.$u.api.user.login(this.phone, value)
 					.then(res => {
+						console.log('res.code')
+						console.log(res.code)
 						if (res.code == "00000") {
+							
 							let token = res.data;
+							console.log(token)
 							uni.setStorageSync("token", token);
-							uni.switchTab({
-								url:"/pages/index/index"
+							console.log('token')
+							uni.navigateTo({
+								url:"/pages/user/index"
 							})
+
 						} else {
 							this.$refs.uTips.show({
 								title: '验证码错误',

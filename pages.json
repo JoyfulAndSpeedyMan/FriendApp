@@ -6,8 +6,8 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "web-socket测试"
-				// "navigationStyle":"custom"
+				"navigationBarTitleText": "我",
+				"navigationStyle": "custom"
 			}
 		},
 		{
@@ -27,7 +27,7 @@
 		{
 			"path": "pages/test",
 			"style": {
-				"navigationBarTitleText": "web-socket测试"
+				"navigationBarTitleText": "测试"
 				// "navigationStyle":"custom"
 			}
 		}, {
@@ -53,6 +53,37 @@
             }
             
         }
+        ,{
+            "path" : "pages/post/post",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        },{
+            "path" : "pages/post/post-comment",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        }
+        ,{
+            "path" : "pages/websocket/websocket",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+        }
+        ,{
+            "path" : "pages/treehole/treehole",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }  
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
@@ -68,7 +99,7 @@
 		"list": [
 			{
 				"pagePath": "pages/index/index",
-				"text": "组件"
+				"text": "主页"
 			},
 			{
 				"pagePath" : "pages/friend/index",

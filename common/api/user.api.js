@@ -18,7 +18,8 @@ const install = (Vue, vm) => {
 		getAllUser,
 		getBaseInfo,
 		
-		addFriend};
+		addFriend
+	};
 }
 
 export default {
