@@ -87,6 +87,7 @@
 		font-size: 1em;
 		background-color: $u-type-info-light;
 		padding: 5px;
+		border-radius: 6px;
 		.username{
 			color: $u-type-primary;
 		}
