@@ -9,11 +9,26 @@
 			<view slot="head">
 				<PostLine :item="item"></PostLine>
 			</view>
-			<view class="" slot="body">
+			<view slot="body" v-if="item.forwardUid">
+				<view>
+					转发
+				</view>
+				<view class="bottom ">
+					<span v-if="item.forwardUid" class="username">{{item.forwardUName}}:</span>
+					<span class="forward"> {{item.content}}</span>
+				</view>
+			</view>
+			<view v-else slot="body">
 				{{item.content}}
 			</view>
+			
 			<view class="" slot="foot">
-				<PostCartFoot :item="item"></PostCartFoot>
+				<PostCartFoot 
+				:item="item" 
+				:handThumb="handThumb"
+				:handUnThumb="handUnThumb"
+				:handForward="handForward"
+				@commentClick="$emit('commentClick',item._id)"></PostCartFoot>
 			</view>
 		</u-card>
 	</view>
@@ -27,8 +42,24 @@
 			PostLine,
 			PostCartFoot
 		},
-		props:['item'],
+		// props:['item','handleThumb','handleUnThumb','handForward'],
+		props:{
+			item:{
+				type: Object
+			},
+			handThumb:{
+				type:Function
+			},
+			handUnThumb:{
+				type:Function
+			},
+			handForward:{
+				type:Function
+			}
+		},
 		name: "PostCard",
+		created(){
+		},
 		data() {
 			return {
 				// item: {
@@ -49,6 +80,19 @@
 	}
 </script>
 
-<style>
-
+<style scoped lang="scss">
+	.bottom {
+		margin-top: 20rpx;
+		display: flex;
+		font-size: 1em;
+		background-color: $u-type-info-light;
+		padding: 5px;
+		.username{
+			color: $u-type-primary;
+		}
+		.forward {
+			color: $u-tips-color;
+			margin-left: 10rpx;
+		}
+	}
 </style>

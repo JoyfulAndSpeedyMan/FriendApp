@@ -1,6 +1,12 @@
 <template>
 	<view>
-		<view class="all-reply">
+		<view>
+			<qizai9527-input-comment :placeholder="placeholder" :valueData="tmpCommentData" :isShow="isShowComment"
+				:curKey="curCommentId" @submitComment="submitComment" @clickOther="clickOther">
+			</qizai9527-input-comment>
+		</view>
+		<u-toast ref="uToast" />
+		<view class="all-reply" v-if="commentList && commentList.length>0">
 			<view class="item" v-for="(item, index) in commentList" :key="index">
 				<view class="comment">
 					<view class="top">
@@ -25,9 +31,12 @@
 						<view class="username">{{ item.replyComment.nickname }}</view>
 						<view class="text">{{ item.replyComment.content }}</view>
 					</view>
-					<view class="content">{{ item.content }}</view>
+					<view class="content" @click="clickComment(item._id)">{{ item.content }}</view>
 				</view>
 			</view>
+		</view>
+		<view v-else>
+			<u-empty text="当前没有评论" mode="list" style="margin-top: 50%;"></u-empty>
 		</view>
 	</view>
 </template>
@@ -36,14 +45,18 @@
 	export default {
 		data() {
 			return {
-				id: '',
+				postId: '',
 				commentList: [],
-				total: 0
+				total: 0,
+				isShowComment: false,
+				placeholder: "友善是交流的起点",
+				tmpCommentData: [],
+				curCommentId: '',
+				itemMap: {},
 			};
 		},
 		onLoad(option) {
-			console.log(option.id)
-			this.id = option.id;
+			this.postId = option.id;
 			this.getComment();
 		},
 		methods: {
@@ -73,71 +86,47 @@
 			},
 			// 评论列表
 			getComment() {
-				this.$u.api.postComment.getPostComment(this.id, 0, 10)
+				this.$u.api.postComment.getPostComment(this.postId, 0, 10)
 					.then(res => {
 						this.commentList = res.data.list;
 						this.total = res.data.total
+						if(this.commentList){
+							for(let item of this.commentList) {
+								this.itemMap[item._id]=item;
+							}
+						}
 					})
-				// this.commentList = [{
-				// 		id: 1,
-				// 		name: '叶轻眉',
-				// 		date: '12-25 18:58',
-				// 		contentText: '我不信伊朗会没有后续反应，美国肯定会为今天的事情付出代价的',
-				// 		url: 'https://cdn.uviewui.com/uview/template/SmilingDog.jpg',
-				// 		allReply: 12,
-				// 		likeNum: 33,
-				// 		isLike: false,
-				// 		replyList: [{
-				// 				name: 'uview',
-				// 				contentStr: 'uview是基于uniapp的一个UI框架，代码优美简洁，宇宙超级无敌彩虹旋转好用，用它！'
-				// 			},
-				// 			{
-				// 				name: '粘粘',
-				// 				contentStr: '今天吃什么，明天吃什么，晚上吃什么，我只是一只小猫咪为什么要烦恼这么多'
-				// 			}
-				// 		]
-				// 	},
-				// 	{
-				// 		id: 2,
-				// 		name: '叶轻眉1',
-				// 		date: '01-25 13:58',
-				// 		contentText: '我不信伊朗会没有后续反应，美国肯定会为今天的事情付出代价的',
-				// 		allReply: 0,
-				// 		likeNum: 11,
-				// 		isLike: false,
-				// 		url: 'https://cdn.uviewui.com/uview/template/niannian.jpg',
-				// 	},
-				// 	{
-				// 		id: 3,
-				// 		name: '叶轻眉2',
-				// 		date: '03-25 13:58',
-				// 		contentText: '我不信伊朗会没有后续反应，美国肯定会为今天的事情付出代价的',
-				// 		allReply: 0,
-				// 		likeNum: 21,
-				// 		isLike: false,
-				// 		allReply: 2,
-				// 		url: '../../../static/logo.png',
-				// 		replyList: [{
-				// 				name: 'uview',
-				// 				contentStr: 'uview是基于uniapp的一个UI框架，代码优美简洁，宇宙超级无敌彩虹旋转好用，用它！'
-				// 			},
-				// 			{
-				// 				name: '豆包',
-				// 				contentStr: '想吃冰糖葫芦粘豆包，但没钱5555.........'
-				// 			}
-				// 		]
-				// 	},
-				// 	{
-				// 		id: 4,
-				// 		name: '叶轻眉3',
-				// 		date: '06-20 13:58',
-				// 		contentText: '我不信伊朗会没有后续反应，美国肯定会为今天的事情付出代价的',
-				// 		url: 'https://cdn.uviewui.com/uview/template/SmilingDog.jpg',
-				// 		allReply: 0,
-				// 		likeNum: 150,
-				// 		isLike: false
-				// 	}
-				// ];
+			},
+			clickComment(id) {
+				this.curCommentId = id;
+				this.placeholder = "回复 " + this.itemMap[id].nickname + "：";
+				this.isShowComment = true;
+			},
+			// 提交评论并清除记忆
+			submitComment(e) {
+				this.isShowComment = false;
+				this.tmpCommentData[this.curCommentId] = '';
+				this.$u.api.postComment.reply
+				(	
+					this.postId,
+					this.itemMap[this.curCommentId].userId,
+					this.curCommentId,
+					e
+				)
+				.then(res=>{
+					if(res.code==='00000'){
+						this.$refs.uToast.show({
+							title: '回复成功',
+							type: 'success'
+						})
+						this.getComment()
+					}
+				})
+			},
+			// 点击空白返回并保存记忆
+			clickOther(e) {
+				this.isShowComment = false;
+				this.tmpCommentData[this.curCommentId] = e;
 			}
 		}
 	};
@@ -239,6 +228,18 @@
 				font-size: 24rpx;
 				color: #7a7a7a;
 			}
+		}
+	}
+
+	.bottom {
+		margin-top: 20rpx;
+		display: flex;
+		font-size: 24rpx;
+		color: #9a9a9a;
+
+		.reply {
+			color: #5677fc;
+			margin-left: 10rpx;
 		}
 	}
 </style>
