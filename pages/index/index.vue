@@ -55,6 +55,15 @@
 			}
 		},
 		methods: {
+			reachBottom() {
+				// 此tab为空数据
+				if(this.current != 2) {
+					this.loadStatus.splice(this.current,1,"loading")
+					setTimeout(() => {
+						this.getOrderList(this.current);
+					}, 1200);
+				}
+			},
 			// tab栏切换
 			change(index) {
 				this.swiperCurrent = index;

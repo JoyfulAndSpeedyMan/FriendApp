@@ -48,8 +48,9 @@
             "path" : "pages/friend/index",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "好友列表",
-                "enablePullDownRefresh": false
+                "navigationBarTitleText": "好友",
+                "enablePullDownRefresh": false,
+				"navigationStyle":"custom"
             }
             
         }
@@ -83,6 +84,43 @@
                 "navigationBarTitleText": "",
                 "enablePullDownRefresh": false
             }  
+        }
+        ,{
+            "path" : "pages/friend/add-friend",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/friend/add-friend-detail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/friend/friend-info",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+            }
+            
+        }
+        ,{
+            "path" : "pages/user/setting",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
         }
     ],
 	"globalStyle": {

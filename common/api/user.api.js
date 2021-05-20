@@ -6,7 +6,7 @@ const install = (Vue, vm) => {
 	
 	let getAllUser= ()=>vm.$u.get(prefix+'all')
 	let getBaseInfo= ()=>vm.$u.get(prefix+'baseInfo')
-	
+	let getBaseInfo2= (fid)=>vm.$u.get(prefix+'baseInfo2?fid='+fid)
 	
 	
 	let fPrefix=prefix+'friend/'
@@ -17,7 +17,7 @@ const install = (Vue, vm) => {
 		login,
 		getAllUser,
 		getBaseInfo,
-		
+		getBaseInfo2,
 		addFriend
 	};
 }

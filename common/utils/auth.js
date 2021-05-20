@@ -9,5 +9,16 @@ export default {
 		let token=uni.getStorageSync('token');
 		token=token.accessToken;
 		return token;
+	},
+	navLogin(){
+		uni.navigateTo({
+			url:'/pages/user/login/index'
+		})
+	},
+	logout(){
+		uni.removeStorageSync('token');
+		uni.navigateTo({
+			url:'/pages/user/login/index'
+		})
 	}
 }

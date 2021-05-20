@@ -22,8 +22,12 @@ app.$u.api = {}
 import userApi from 'common/api/user.api.js'
 import postApi from 'common/api/post.api.js'
 import postCommentApi from 'common/api/post-comment.api.js'
+import friendApi from 'common/api/friend.api.js'
 Vue.use(userApi, app)
 Vue.use(postApi, app)
 Vue.use(postCommentApi, app)
+Vue.use(friendApi, app)
 
 app.$mount()
+
+export default app;

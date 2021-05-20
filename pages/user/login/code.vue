@@ -22,7 +22,8 @@
 				maxlength: 6,
 				second: 60,
 				show: false,
-				error: false
+				error: false,
+				value: ''
 			};
 		},
 		computed: {},
@@ -69,8 +70,8 @@
 							console.log(token)
 							uni.setStorageSync("token", token);
 							console.log('token')
-							uni.navigateTo({
-								url:"/pages/user/index"
+							uni.reLaunch({
+								url: '/'
 							})
 
 						} else {
@@ -82,7 +83,6 @@
 							this.value=''
 						}
 					})
-				// console.log('finish', value);
 			}
 		}
 	};

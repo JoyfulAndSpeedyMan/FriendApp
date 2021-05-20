@@ -44,7 +44,7 @@
 
 				<view class="u-m-t-20">
 					<u-cell-group>
-						<u-cell-item icon="setting" title="设置"></u-cell-item>
+						<u-cell-item icon="setting" title="设置" @click="settingClick"></u-cell-item>
 					</u-cell-group>
 				</view>
 			</view>
@@ -65,9 +65,6 @@
 			}
 		},
 		onLoad() {
-			console.log("load user/index")
-			console.log('isLogin')
-			console.log(auth.isLogin())
 			if (auth.isLogin())
 				this.fetchUserInfo();
 		},
@@ -78,6 +75,11 @@
 						this.user = res.data;
 						console.log(res);
 					})
+			},
+			settingClick(){
+				uni.navigateTo({
+					url:'./setting'
+				})
 			}
 		}
 	}
