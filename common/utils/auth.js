@@ -11,6 +11,7 @@ export default {
 		return token;
 	},
 	navLogin(){
+		console.log('navLogin')
 		uni.navigateTo({
 			url:'/pages/user/login/index'
 		})

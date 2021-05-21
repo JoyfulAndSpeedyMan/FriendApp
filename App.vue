@@ -2,37 +2,57 @@
 	import auth from '@/common/utils/auth.js'
 	export default {
 		onLaunch: function() {
-			this.checkLogin();
+			console.log('App Launch start')
+			if(this.checkLogin()){
+			}
 			console.log('App Launch')
 		},
 		onShow: function() {
+			console.log('App start')
 			this.checkLogin();
 			console.log('App Show')
 		},
 		onHide: function() {
 			console.log('App Hide')
 		},
-		data:{
-			excludePaths: ['/pages/user/login/index','/pages/user/login/code'],
-		},
 		methods:{
 			checkLogin(){
-				if(!auth.isLogin()){
+				if(this.$store.state.isLoginNaving){
+					return false;
+				}
+				if(auth.isLogin()){
+					return true;
+				}
+				else{
+					let isNav = true;
 					let path = this.$route.path;
-					for(let i in this.excludePaths){
-						let ep = this.excludePaths[i];
-						if(ep != path)
-							this.login();
+					let eps = this.$store.state.excludeLoginPaths;
+					for(let i in eps){
+						let ep = eps[i];
+						// console.log('ep != path')
+						// console.log(ep == path)
+						if(ep == path){
+							isNav = false;
+							break;
+						}
 					}
+					if(isNav)
+						this.login();
 				}
 			},
 			login(){
+				this.$store.commit('loginNav')
 				auth.navLogin();
+				this.$store.commit('endNav')
 			}
 		},
 		watch: {
 			$route(n,o){
+				// console.log('$route start' )
+				if(o.path == n.path)
+					return;
 				this.checkLogin();
+				// console.log('$route end' )
 			}
 		}
 	}

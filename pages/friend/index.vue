@@ -13,6 +13,9 @@
 		</view>
 		
 		</u-navbar>
+		<u-cell-group>
+			<u-cell-item title="新朋友" @click="clickNewFriends"></u-cell-item>
+		</u-cell-group>
 		<u-index-list :scrollTop="scrollTop" :index-list="indexList">
 			<view v-for="(lv,lk, i) in friends" :key="i">
 				<u-index-anchor :index="lk" />
@@ -48,15 +51,20 @@
 			this.scrollTop = e.scrollTop;
 		},
 		onLoad() {
-			this.loadFriends();
+			this.init();
 		},
 		methods: {
-			...mapActions({
-				loadFriends: 'friend/loadFriends' 
-			}),
+			...mapActions('friend',[
+				'init'
+			]),
 			handleAddFriend(){
 				uni.navigateTo({
 					url:'./add-friend'
+				})
+			},
+			clickNewFriends(){
+				uni.navigateTo({
+					url:'./new-friend'
 				})
 			},
 			clickUser(o){

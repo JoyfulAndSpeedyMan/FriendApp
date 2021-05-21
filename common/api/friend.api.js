@@ -7,7 +7,7 @@ const install = (Vue, vm) => {
 	let addFriend = (friendId,content)=>vm.$u.put(`${prefix}/request`,{friendId,content})
 	let acceptFriend = (friendId)=>vm.$u.put(`${prefix}/request/accept}`,{friendId})
 	
-	let getFriendRequst = (page,size)=>vm.$u.get(`${prefix}/request`+this.$u.queryParams({page,size}))
+	let getFriendRequst = ()=>vm.$u.get(`${prefix}/request`)
 	
 	let deleteFriend = (friendId)=>vm.$u.delete(`${prefix}`,{friendId})
 	// 将各个定义的接口名称，统一放进对象挂载到vm.$u.api(因为vm就是this，也即this.$u.api)下
