@@ -1,4 +1,5 @@
 import vm from '@/main.js'
+import api from '@/common/api/friend-axios.api.js'
 const friend = {
 	namespaced: true,
 	state: {
@@ -15,13 +16,13 @@ const friend = {
 	},
 	actions: {
 		loadFriends({ commit, state }) {
-			vm.$u.api.friend.getAllFriends()
+			api.getAllFriends()
 				.then(res=>{
 					commit('setFriends',res.data)
 				})
 		},
 		loadFriendRequests({ commit, state }){
-			vm.$u.api.friend.getFriendRequst()
+			api.getFriendRequst()
 				.then(res=>{
 					commit('setFriendRequests',res.data)
 				})

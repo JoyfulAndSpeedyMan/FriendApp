@@ -51,7 +51,7 @@
 			this.scrollTop = e.scrollTop;
 		},
 		onLoad() {
-			this.init();
+			
 		},
 		methods: {
 			...mapActions('friend',[

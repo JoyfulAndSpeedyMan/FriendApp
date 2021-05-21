@@ -4,6 +4,7 @@
 		onLaunch: function() {
 			console.log('App Launch start')
 			if(this.checkLogin()){
+				this.$store.dispatch('friend/init')
 			}
 			console.log('App Launch')
 		},
