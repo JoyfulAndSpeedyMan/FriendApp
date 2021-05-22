@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import friend from './friend/index.js'
-
+import chat from './chat/chat.js'
+import ws from './ws/index.js'
 Vue.use(Vuex); //vue的插件机制
 
 
@@ -29,7 +30,9 @@ const store = new Vuex.Store({
 		}
 	},
 	modules: {
-		friend
+		friend,
+		ws,
+		chat
 	},
 
 })
