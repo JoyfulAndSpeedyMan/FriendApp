@@ -1,6 +1,7 @@
 import Interceptor from "./core/interceptor";
 import Request from "./index";
 import auth from '@/common/utils/auth.js'
+import conf from '@/common/config.js'
 
 export const globalInterceptor = {
   request: new Interceptor(),
@@ -14,7 +15,7 @@ export const globalInterceptor = {
  * `header` 中`content-type`设置特殊参数 或 配置其他会导致触发 跨域 问题，出现跨域会直接进入响应拦截器的catch函数中
  */
 export const config = {
-  baseURL: "http://localhost:10000",
+  baseURL: conf.baseUrl,
   header: {
     // 'X-Auth-Token': 'xxxx',
     contentType: "application/x-www-form-urlencoded"
@@ -34,7 +35,7 @@ export const config = {
  */
 globalInterceptor.request.use(
   config => {
-    console.log("is global request interceptor");
+	auth.checkLogin();
 	let tokenKey = "Authorization";
 	let prifix = "Bearer ";
 	config.header[tokenKey] = prifix + auth.getAccessToken();
@@ -63,6 +64,11 @@ globalInterceptor.response.use(
     // return res.data;
 	console.log(res);
 	if (res.statusCode == 200) {
+		let r = res.data;
+		if(res.code === 'A0220'){
+			auth.navLogin();
+			return false;
+		}
 		// 如果把originalData设置为了true，这里return回什么，this.$u.post的then回调中就会得到什么
 		return res.data;
 	} else

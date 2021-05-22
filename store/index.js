@@ -7,22 +7,30 @@ Vue.use(Vuex); //vue的插件机制
 
 //Vuex.Store 构造器选项
 const store = new Vuex.Store({
-	state: { 
+	state: {
 		// 不需要登录的路径
-		excludeLoginPaths: ['/pages/user/login/index','/pages/user/login/code'],
+		excludeLoginPaths: ['pages/user/login/index', 'pages/user/login/code'],
 		// 当前是否在路由跳转中
 		isLoginNaving: false
 	},
-	mutations:{
-		loginNav(state){
-			state.isLoginNaving= true;
+	mutations: {
+		loginNav(state) {
+			state.isLoginNaving = true;
 		},
-		endNav(state){
-			state.isLoginNaving= false;
+		endNav(state) {
+			state.isLoginNaving = false;
 		}
 	},
-	modules:{
+	actions: {
+		init({
+			dispatch
+		}) {
+			this.dispatch('friend/init')
+		}
+	},
+	modules: {
 		friend
-	}
+	},
+
 })
 export default store

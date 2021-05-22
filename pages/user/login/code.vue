@@ -69,9 +69,9 @@
 							let token = res.data;
 							console.log(token)
 							uni.setStorageSync("token", token);
-							console.log('token')
+							this.$store.dispatch('init')
 							uni.reLaunch({
-								url: '/'
+								url: '/pages/index/index'
 							})
 
 						} else {

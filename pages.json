@@ -33,7 +33,14 @@
 		}, {
 			"path": "pages/user/login/index",
 			"style": {
-				"navigationBarTitleText": "登录"
+				"navigationBarTitleText": "登录",
+				"app-plus": {
+					"titleNView": {
+						"autoBackButton": false
+					},
+					"popGesture": "none"
+				}
+
 				// "navigationStyle":"custom"
 			}
 		},
@@ -43,95 +50,76 @@
 				"navigationBarTitleText": ""
 				// "navigationStyle":"custom"
 			}
-		}
-	    ,{
-            "path" : "pages/friend/index",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "好友",
-                "enablePullDownRefresh": false,
-				"navigationStyle":"custom"
-            }
-            
-        }
-        ,{
-            "path" : "pages/post/post",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-        },{
-            "path" : "pages/post/post-comment",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-        }
-        ,{
-            "path" : "pages/websocket/websocket",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-        }
-        ,{
-            "path" : "pages/treehole/treehole",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }  
-        }
-        ,{
-            "path" : "pages/friend/add-friend",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/friend/add-friend-detail",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/friend/friend-info",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false,
+		}, {
+			"path": "pages/friend/index",
+			"style": {
+				"navigationBarTitleText": "好友",
+				"enablePullDownRefresh": false,
 				"navigationStyle": "custom"
-            }
-            
-        }
-        ,{
-            "path" : "pages/user/setting",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/friend/new-friend",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-    ],
+			}
+
+		}, {
+			"path": "pages/post/post",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/post/post-comment",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/websocket/websocket",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/treehole/treehole",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/friend/add-friend",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/friend/add-friend-detail",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/friend/friend-info",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
+
+		}, {
+			"path": "pages/user/setting",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/friend/new-friend",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
@@ -143,14 +131,13 @@
 		"selectedColor": "#303133",
 		"backgroundColor": "#FFFFFF",
 		"borderStyle": "black",
-		"list": [
-			{
+		"list": [{
 				"pagePath": "pages/index/index",
 				"text": "主页"
 			},
 			{
-				"pagePath" : "pages/friend/index",
-				"text":"好友"
+				"pagePath": "pages/friend/index",
+				"text": "好友"
 			},
 			{
 				"pagePath": "pages/chat/index",

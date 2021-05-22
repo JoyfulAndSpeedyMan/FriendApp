@@ -11,9 +11,12 @@
 
 <script>
 	import HmFriendsRequestsCard from '@/components/hm-friends-requests-card/index.vue'
+	import api from '@/common/api/friend-axios.api.js'
 	import {
 		mapState,
-		mapActions
+		mapGetters,
+		mapMutations,
+		mapActions,
 	} from 'vuex'
 	export default {
 		components: {
@@ -21,26 +24,61 @@
 		},
 		data() {
 			return {
-
 			};
 		},
 		methods: {
+			...mapActions('friend',[
+				'putFriendByIdAction'
+			]),
+			...mapMutations('friend',[
+				'removeFriendRequests'
+			]),
 			moreDotClick(){
 				console.log('moreDotClick')
 			},
-			clickItem(id){
-				console.log('clickItem',id)
+			clickItem(i){
+				console.log('clickItem',i)
 			},
-			clickReject(id){
+			clickReject(i){
+				let id = this.getRequestFid();
+				api.rejectFriendRequst(id)
+					.then(res=>{
+						if(res.code!='00000'){
+							uni.showToast({
+							    title: res.message,
+							    icon: 'none',
+							    duration: 2000
+							});
+							this.removeFriendRequests(_id)
+						}
+					})
 				console.log('clickReject',id)
 			},
-			clickAdd(id){
-				console.log('clickAdd',id)
+			clickAdd(i){
+				console.log('clickAdd',i)
+				let id = this.getRequestFid(i);
+				let _id = this.friendRequests[i]._id;
+				api.acceptFriendRequst(id)
+					.then(res=>{
+						if(res.code=='00000'){
+							uni.showToast({
+							    title: res.message,
+							    icon: 'none',
+							    duration: 2000
+							});
+							this.putFriendByIdAction(id)
+							this.removeFriendRequests(_id)
+						}
+					})
+		
 			}
 		},
 		computed:{
 			...mapState('friend',[
 				'friendRequests'
+			]),
+			...mapGetters('friend',[
+				'getRequestFid'
 			])
 		}
 	}

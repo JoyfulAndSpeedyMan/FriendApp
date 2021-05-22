@@ -6,7 +6,7 @@
         <image class="titleClass" :src="options.titleClass" @click="moreDotClick"/>
       </view>
 	  <view class="bd" style="height: 30rpx;"></view>
-	  <view class="bd" v-for="item in list" @click="clickItem(item._id)">
+	  <view class="bd" v-for="(item,index) in list" :key="index" @click="clickItem(index)">
 		  <view class="container" >
 		    <image class="userpng" :src="item.avatar" />
 		    <view class="outer">
@@ -15,10 +15,10 @@
 		    </view>
 		  </view>
 
-		  <view class="row1" @click.stop="clickReject(item._id)">
+		  <view class="row1" @click.stop="clickReject(index)">
 		    <image class="erroimg" :src="options.erroimg" />
 		  </view>
-		  <view class="addClass" @click.stop="clickAdd(item._id)">
+		  <view class="addClass" @click.stop="clickAdd(index)">
 		    <image class="addimg" :src="options.addimg" />
 		  </view>
 	  </view>

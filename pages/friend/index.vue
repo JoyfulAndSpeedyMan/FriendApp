@@ -18,10 +18,12 @@
 		</u-cell-group>
 		<u-index-list :scrollTop="scrollTop" :index-list="indexList">
 			<view v-for="(lv,lk, i) in friends" :key="i">
-				<u-index-anchor :index="lk" />
-				<view class="list-cell u-border-bottom" v-for="(o,k,j) in lv" :key="j" @click="clickUser(o)">
-					<u-avatar :src="o.fAvatar"></u-avatar>
-					<span class= "username">{{o.friendName}}</span>
+				<view v-if="lv.length > 0">
+					<u-index-anchor :index="lk" />
+					<view class="list-cell u-border-bottom" v-for="(o,k,j) in lv" :key="j" @click="clickUser(lk,j)">
+						<u-avatar :src="o.fAvatar"></u-avatar>
+						<span class= "username">{{o.friendName}}</span>
+					</view>
 				</view>
 			</view>
 		</u-index-list>
@@ -67,9 +69,12 @@
 					url:'./new-friend'
 				})
 			},
-			clickUser(o){
+			clickUser(k,j){
+				let info = this.friends[k][j];
+				console.log(`k: ${k} , j : ${j}`)
+				console.log(info)
 				uni.navigateTo({
-					url:'./friend-info'+this.$u.queryParams(o)
+					url:'./friend-info'+this.$u.queryParams(this.friends[k][j])
 				})
 			}
 		},
@@ -80,7 +85,8 @@
 			indexList(){
 				let  arr = [];
 				for(let s in this.friends){
-					arr.push(s)
+					if(this.friends[s].length>0)
+						arr.push(s)
 				}
 				return arr;
 			}
