@@ -1,0 +1,4 @@
+export default {
+	SEND_CHAT_MSG: "SEND_CHAT_MSG",
+	PUSH_CHAT_MSG: "PUSH_CHAT_MSG"
+}

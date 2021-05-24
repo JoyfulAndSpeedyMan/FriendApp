@@ -4,6 +4,9 @@
 			<u-cell-item title="头像" @click="proxyClick('avatar')">
 				<u-image width='100rpx' height='100rpx' slot="right-icon" :src="info.avatar" shape="circle"></u-image>
 			</u-cell-item>
+			<u-cell-item title="备注" :value="info.nickname" @click="proxyClick('noteName')" v-if="showNoteName">
+				
+			</u-cell-item>
 			<u-cell-item title="昵称" :value="info.nickname" @click="proxyClick('nickname')"></u-cell-item>
 			<u-cell-item title="性别" :value="info.sex" @click="proxyClick('sex')"></u-cell-item>
 			<u-cell-item title="出生日期" :value="info.birthday" @click="proxyClick('birthday')"></u-cell-item>
@@ -14,6 +17,14 @@
 			</u-cell-item>
 		</u-cell-group>
 		<u-calendar v-model="showEditBirthday" @change="handleCalendarChange"></u-calendar>
+		<u-popup v-model="showPopup" mode="center" @close="popupClose">
+			<view class="input">
+				<u-input v-model="text" type="textarea"></u-input>
+				<view style="margin-top: 20rpx;">
+					<u-button @click="confirm">确定</u-button>
+				</view>
+			</view>
+		</u-popup>
 	</view>
 </template>
 
@@ -26,6 +37,10 @@
 			groupBorder:{
 				type: Boolean,
 				default: true
+			},
+			showNoteName: {
+				type: Boolean,
+				default: false
 			},
 			allEdit: {
 				type:Boolean,
@@ -51,12 +66,16 @@
 		data() {
 			return {
 				showEditBirthday: false,
-				showEditProfile: false
+				showEditProfile: false,
+				showPopup: false,
+				currentEdit: '',
+				text:'',
+				oldText: ''
 			}
 		},
 		methods: {
 			checkEdit(name){
-				let optionName = 'edit'+ name.charAt(0).toUpperCase();
+				let optionName = 'edit'+ name.charAt(0).toUpperCase() + name.substr(1);
 				if(this.allEdit || this[optionName])
 					return true;
 				else
@@ -79,6 +98,11 @@
 			},
 			nicknameClick(){
 				console.log('nicknameClick')
+				this.currentEdit = 'nickname'
+				
+				this.text = this.info.nickname
+				this.oldText = this.text
+				this.showPopup=true;
 			},
 			sexClick() {
 				console.log('sexClick')
@@ -99,15 +123,30 @@
 			},
 			profileClick(){
 				console.log('profileClick')
+				this.currentEdit = 'profile'
+				
+				this.text = this.info.profile
+				this.oldText = this.text
+				this.showPopup=true;
 			},
 			handleCalendarChange(e){
 				this.info.birthday = e.result
 			},
-
+			popupClose(){
+				this.showPopup=false;
+				this.text = this.oldText
+			},
+			confirm(){
+				this.info[this.currentEdit] = this.text
+				this.showPopup=false;
+			}
 		}
 	}
 </script>
 
 <style>
-
+.input{
+	padding: 30rpx;
+	width: 400rpx;
+}
 </style>

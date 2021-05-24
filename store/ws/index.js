@@ -3,7 +3,7 @@ const ws = {
 	state: {
 		receiveHandler: [],
 		protoFields : [
-			'ops','code','msg','target','type','content','bytesContent'
+			'ops','code','msg','msgId','target','extend','type','content','bytesContent'
 		]
 	},
 	mutations:{

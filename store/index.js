@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import friend from './friend/index.js'
 import chat from './chat/chat.js'
 import ws from './ws/index.js'
+import user from './user/user.js'
 Vue.use(Vuex); //vue的插件机制
 
 
@@ -27,12 +28,15 @@ const store = new Vuex.Store({
 			dispatch
 		}) {
 			this.dispatch('friend/init')
+			this.dispatch('chat/init')
+			this.dispatch('user/init')
 		}
 	},
 	modules: {
 		friend,
 		ws,
-		chat
+		chat,
+		user
 	},
 
 })

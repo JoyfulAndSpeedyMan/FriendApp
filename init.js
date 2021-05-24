@@ -4,7 +4,7 @@ import ws from './ws/web-socket.js'
 let init = () => {
 	if(auth.checkLogin()){
 		store.dispatch('init')
-		// ws.connect()
+		ws.connect()
 	}
 }
 export default init;

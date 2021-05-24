@@ -18,8 +18,8 @@ export const config = {
   baseURL: conf.baseUrl,
   header: {
     // 'X-Auth-Token': 'xxxx',
-    contentType: "application/x-www-form-urlencoded"
-    // 'Content-Type': 'application/json'
+    // contentType: "application/x-www-form-urlencoded"
+    'Content-Type': 'application/json'
   }
 };
 

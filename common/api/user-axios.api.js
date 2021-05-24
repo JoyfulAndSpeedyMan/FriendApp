@@ -8,6 +8,19 @@ export default {
 				fid
 			},
 		});
+	},
+	getBaseInfo() {
+		return global.$http.request({
+			url: `${prefix}/baseInfo`,
+			method: 'get',
+		});
+	},
+	updateInfo(user){
+		return global.$http.request({
+			url: `${prefix}`,
+			method: 'put',
+			data: user
+		});
 	}
 
 }

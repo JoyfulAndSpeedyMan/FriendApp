@@ -1,25 +1,11 @@
 <template>
 	<view>
-		<view class="wrap">
-			<view class="u-tabs-box">
-				<u-tabs-swiper activeColor="#f29100" ref="tabs" :list="list" :current="current" @change="change"
-					:is-scroll="false" swiperWidth="750"></u-tabs-swiper>
+		<u-navbar :is-back="fasle"  title="贴吧">
+			<view slot="right" class="right-icon">
+				<u-icon name="plus" color="#2979ff" size="34" @click="addClick"></u-icon>
 			</view>
-			<swiper class="swiper-box" :current="swiperCurrent" @transition="transition"
-				@animationfinish="animationfinish">
-				<swiper-item class="swiper-item">
-					<scroll-view scroll-y style="height: 100%;width: 100%;" @scrolltolower="reachBottom">
-						<!-- <Post></Post> -->
-						<Post ref="post"></Post>
-					</scroll-view>
-				</swiper-item>
-				<swiper-item class="swiper-item">
-					<scroll-view scroll-y style="height: 100%;width: 100%;" @scrolltolower="reachBottom">
-						<TreeHole></TreeHole>
-					</scroll-view>
-				</swiper-item>
-			</swiper>
-		</view>
+		</u-navbar>
+		<Post ref="post"></Post>
 	</view>
 </template>
 
@@ -67,6 +53,11 @@
 			// tab栏切换
 			change(index) {
 				this.swiperCurrent = index;
+			},
+			addClick(){
+				uni.navigateTo({
+					url:'../post/new-post'
+				})
 			},
 			transition({
 				detail: {
@@ -253,5 +244,9 @@
 
 	.swiper-item {
 		height: 100%;
+	}
+	
+	.right-icon{
+		padding: 20rpx
 	}
 </style>

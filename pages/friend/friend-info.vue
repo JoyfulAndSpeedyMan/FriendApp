@@ -7,6 +7,9 @@
 			</view>
 		</u-navbar>
 		<UserBaseInfo :info="info" :groupBorder="false"></UserBaseInfo>
+		<view class="bottom-buttons">
+			<u-button size="medium" type="primary" @click="sendMsgClick">发消息</u-button>
+		</view>
 		<u-toast ref="uToast" />
 		<u-action-sheet :list="list" v-model="sheetVisable" @click="sheetItemClick"></u-action-sheet>
 	</view>
@@ -64,6 +67,11 @@
 							}
 						})
 				}
+			},
+			sendMsgClick(){
+				uni.navigateTo({
+					url:'/pages/chat/chat?friendId='+this.info.id
+				})
 			}
 		}
 	}
@@ -72,5 +80,14 @@
 <style scoped lang="scss">
 	.right-dot {
 		padding: 20rpx;
+	}
+	.bottom-buttons{
+		position: absolute;
+		bottom: 0;
+		width: 100%;
+		padding: 20rpx;
+		// background-color: #39B54A;
+		display: flex;
+		justify-content: space-around;
 	}
 </style>

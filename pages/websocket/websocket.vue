@@ -6,6 +6,7 @@
 		<button @click="ping">ping</button>
 		<button @click="sendChatMsg">给用户发消息</button>
 		<button @click="login">登录</button>
+		<u-input v-model="fid"></u-input>
 		<u-input v-model="v"></u-input>
 	</view>
 </template>
@@ -17,7 +18,8 @@
 	export default {
 		data() {
 			return {
-				v: ''
+				v: '',
+				fid: ''
 			}
 		},
 		onLoad() {
@@ -41,7 +43,7 @@
 			sendChatMsg(){
 				console.log('click sendChatMsg')
 				let friendId = '60a51940a05854418b8e6e43';
-				wsApi.sendChatMsg(friendId,this.v);
+				wsApi.sendChatMsg(this.fid,this.v);
 			}
 		}
 	}

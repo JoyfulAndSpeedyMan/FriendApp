@@ -11,7 +11,7 @@
 						</view>
 					</view>
 				</u-navbar>
-				<view class="u-flex user-box u-p-l-30 u-p-r-20 u-p-b-30">
+				<view class="u-flex user-box u-p-l-30 u-p-r-20 u-p-b-30" @click="userLineClick" style="background-color: #FFFFFF;">
 					<view class="u-m-r-10">
 						<u-avatar :src="user.avatar" size="140"></u-avatar>
 					</view>
@@ -27,18 +27,9 @@
 					</view>
 				</view>
 
-				<view class="u-m-t-20">
+				<view class="u-m-t-20" style="margin-top: 50px;">
 					<u-cell-group>
-						<u-cell-item icon="rmb-circle" title="支付"></u-cell-item>
-					</u-cell-group>
-				</view>
-
-				<view class="u-m-t-20">
-					<u-cell-group>
-						<u-cell-item icon="star" title="收藏"></u-cell-item>
-						<u-cell-item icon="photo" title="相册"></u-cell-item>
-						<u-cell-item icon="coupon" title="卡券"></u-cell-item>
-						<u-cell-item icon="heart" title="关注"></u-cell-item>
+						<u-cell-item icon="photo" title="动态" @click="mePostClick"></u-cell-item>
 					</u-cell-group>
 				</view>
 
@@ -79,6 +70,16 @@
 			settingClick(){
 				uni.navigateTo({
 					url:'./setting'
+				})
+			},
+			userLineClick(){
+				uni.navigateTo({
+					url: './user-info'
+				})
+			},
+			mePostClick(){
+				uni.navigateTo({
+					url:'./me-post'
 				})
 			}
 		}

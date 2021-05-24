@@ -19,9 +19,10 @@ export default {
 			ops: ReqOps.LOGOUT
 		})
 	},
-	sendChatMsg(friendId, content) {
+	sendChatMsg(friendId,msgId, content) {
 		handler.send({
 			ops: ReqOps.SEND_CHAT_MSG,
+			msgId: msgId,
 			content: content,
 			target: friendId
 		})

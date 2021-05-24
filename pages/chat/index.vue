@@ -1,16 +1,16 @@
 <template>
 	<view>
+		<!-- <navigator url="/pages/test">test页面</navigator> -->
 		<view class="cu-bar bg-white solid-bottom margin-top">
 			<view class="action">
 				<text class="cuIcon-title text-orange "></text> 列表左滑
 			</view>
 		</view>
-		<u-swipe-action 
-		:index="index" 
-		v-for="(item, index) in list" 
-		:key="item.fid" 
-		@click="click"
-			@open="open" :options="options">
+		<u-swipe-action :index="index" v-for="(item, index) in sessionList" :key="item.fid" 
+			@click="click"
+			@close="close" 
+			@open="open" 
+			@content-click="contentClick" :options="options">
 			<view class="cu-list menu-avatar" style="width: 100vw;">
 				<view class="cu-item">
 					<view class="cu-avatar round lg" :style="[{backgroundImage:'url('+item.avatar+')'}]">
@@ -19,11 +19,11 @@
 					<view class="content">
 						<view class="text-grey">{{item.friendName}}</view>
 						<view class="text-gray text-sm">
-							<rich-text :nodes="item.lastMsg==undefined?'':item.lastMsg"></rich-text>
+							<rich-text :nodes="item.lastMsg.content==undefined?'':item.lastMsg.content"></rich-text>
 						</view>
 					</view>
 					<view class="action">
-						<view class="text-grey text-xs">{{item.lastMsgTime}}</view>
+						<view class="text-grey text-xs">{{timeFormat(item.lastMsg.createTime)}}</view>
 					</view>
 				</view>
 			</view>
@@ -38,16 +38,14 @@
 	export default {
 		data() {
 			return {
-				list: [
-					{
-					   fid: '60a51940a05854418b8e6e43',
-					   friendName: '懒羊羊',
-					   avatar: 'https://img0.baidu.com/it/u=3461652273,580994694&fm=26&fmt=auto&gp=0.jpg',
-					   lastMsg: '死亡如风，常伴吾身',
-					   lastMsgTime: '2021-5-22',
-					   unread: 2,
-					}
-				],
+				list: [{
+					fid: '60a51940a05854418b8e6e43',
+					friendName: '懒羊羊',
+					avatar: 'https://img0.baidu.com/it/u=3461652273,580994694&fm=26&fmt=auto&gp=0.jpg',
+					lastMsg: '死亡如风，常伴吾身',
+					lastMsgTime: '2021-5-22',
+					unread: 2,
+				}],
 				options: [{
 						text: '置顶',
 						style: {
@@ -67,7 +65,33 @@
 		},
 		onLoad() {},
 		methods: {
-
+			showData() {
+				console.log(this.sessionList)
+			},
+			timeFormat(date) {
+				return this.$u.timeFrom(date, 'hh:MM');
+			},
+			click(i, j) {
+				console.log('click', i, j)
+			},
+			close(i) {
+				let item = this.sessionList[i];
+				uni.navigateTo({
+					url: `./chat?id=${item._id}&index=${i}`
+				})
+				console.log('close', i)
+			},
+			open(i) {
+				console.log('open', i)
+			},
+			contentClick(i) {
+				console.log('contentClick', i)
+			}
+		},
+		computed: {
+			...mapState('chat', [
+				'sessionList'
+			])
 		}
 	}
 </script>

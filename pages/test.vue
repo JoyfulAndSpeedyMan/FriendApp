@@ -1,6 +1,6 @@
 <template>
-	<view>
-		<view>
+	<view class="content">
+<!-- 		<view>
 			<qizai9527-input-comment 
 			:placeholder="placeholder" 
 			:valueData="tmpCommentData" 
@@ -9,6 +9,9 @@
 			@submitComment="submitComment" 
 			@clickOther="clickOther">
 			</qizai9527-input-comment>
+		</view> -->
+		<view class="my-input">
+			<u-input ></u-input>
 		</view>
 		<button @click="clickComment('1')">显示</button>
 	</view>
@@ -53,4 +56,16 @@
 </script>
 
 <style>
+	.content{
+		position: relative;
+		height: 100vh;
+		width: 100vw;
+	}
+	.my-input{
+		position: absolute;
+		bottom: 50px;
+		width: 100vw;
+		height: 100rpx;
+		background: #39B54A;
+	}
 </style>
